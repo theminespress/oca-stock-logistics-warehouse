@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Cybernexus Solutions
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.uom_rounding</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <setting id="sell_purchase_uom" position="after">
+                <setting
+                    id="uom_rounding_everywhere"
+                    invisible="not group_uom"
+                    help="Use each unit's rounding precision to convert and compare quantities too, not only to round them (as in Odoo 18 and earlier)"
+                >
+                    <field name="uom_rounding_everywhere" />
+                </setting>
+            </setting>
+        </field>
+    </record>
+</odoo>
