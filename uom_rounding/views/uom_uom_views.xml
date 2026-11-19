@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Cybernexus Solutions
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
+<odoo>
+    <record id="product_uom_tree_view" model="ir.ui.view">
+        <field name="name">uom.uom.list - uom_rounding</field>
+        <field name="model">uom.uom</field>
+        <field name="inherit_id" ref="uom.product_uom_tree_view" />
+        <field name="arch" type="xml">
+            <field name="relative_uom_id" position="after">
+                <field
+                    name="rounding_precision"
+                    optional="show"
+                    digits="[42, 6]"
+                    invisible="not rounding_precision"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="product_uom_form_view" model="ir.ui.view">
+        <field name="name">uom.uom.form - uom_rounding</field>
+        <field name="model">uom.uom</field>
+        <field name="inherit_id" ref="uom.product_uom_form_view" />
+        <field name="arch" type="xml">
+            <div name="relative_factor" position="after">
+                <label for="rounding_precision" />
+                <div name="rounding_precision" class="o_row oe_inline">
+                    <field
+                        name="rounding_precision"
+                        class="oe_inline"
+                        style="max-width: 120px;"
+                        digits="[42, 6]"
+                        readonly="(context.get('product_id') or context.get('product_ids')) and id"
+                    />
+                    <span class="text-muted" invisible="rounding_precision">
+                        Not set: uses the Product Unit decimal precision
+                    </span>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>
